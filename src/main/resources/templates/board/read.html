@@ -34,6 +34,8 @@
                     <form th:action="@{'/boards/' + ${board.id}}" th:method="get">
                         <form>
 
+                            마지막 수정일 : <td th:text="${board.getModDate}"></td>
+
                             <div class="form-floating mb-3">
                                 <input type="text" name="title" class="form-control" id="title" placeholder="Title" th:value="${board.getTitle}" readonly>
                                 <label for="title">Title</label>

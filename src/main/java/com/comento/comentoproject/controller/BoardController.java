@@ -7,6 +7,8 @@ import com.comento.comentoproject.requset.BoardPage;
 import com.comento.comentoproject.response.BoardResponse;
 import com.comento.comentoproject.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,19 @@ public class BoardController {
     @GetMapping("/boards")
     public String getList(@ModelAttribute BoardPage boardPage, Model model){
         List<BoardResponse> list = boardService.getList(boardPage);
+        /*
+        int nowPage = list.getPageable().getPageNumber() + 1;
+        int startPage = Math.max(nowPage - 4, 1);
+        int endPage = Math.min(nowPage + 5, list.getTotalPages());
+        */
+
+
         model.addAttribute("boards", list);
+        /*
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+         */
         return "board/list";
     }
 

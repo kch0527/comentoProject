@@ -38,6 +38,7 @@ public class BoardServiceImpl implements BoardService{
                 .id(board.getId())
                 .title(board.getTitle())
                 .content(board.getContent())
+                .modDate(board.getModDate())
                 .build();
 
         return boardResponse;

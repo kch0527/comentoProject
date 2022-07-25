@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -18,9 +19,12 @@ public class BoardCreate {
     @NotBlank(message = "컨텐츠가 없음")
     private String content;
 
+
+
     @Builder
     public BoardCreate(String title, String content) {
         this.title = title;
         this.content = content;
     }
+
 }
