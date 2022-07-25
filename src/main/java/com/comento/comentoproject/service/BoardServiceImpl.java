@@ -56,7 +56,7 @@ public class BoardServiceImpl implements BoardService{
         BoardEditor.BoardEditorBuilder boardEditorBuilder = board.toEditor();
 
         BoardEditor boardEditor = boardEditorBuilder.title(boardEdit.getTitle())
-                .content(board.getContent())
+                .content(boardEdit.getContent())
                 .build();
 
         board.edit(boardEditor);

@@ -22,18 +22,20 @@ public class BoardController {
 
     @GetMapping("/boards")
     public String getList(@ModelAttribute BoardPage boardPage, Model model){
-        System.out.println("getPage : "+boardPage.getPage());
-        System.out.println("getSize : "+boardPage.getSize());
-        System.out.println("getOffset : "+boardPage.getOffset());
         List<BoardResponse> list = boardService.getList(boardPage);
         model.addAttribute("boards", list);
         return "board/list";
     }
 
-    @PostMapping("/boards")
-    public String postBoard(@Valid BoardCreate boardCreate){
-        boardService.saveBoard(boardCreate);
+    @GetMapping("/boards/create")
+    public String createBoardForm(){
         return "board/create";
+    }
+
+    @PostMapping("/boards/create")
+    public String createBoard(@Valid BoardCreate boardCreate){
+        boardService.saveBoard(boardCreate);
+        return "redirect:/boards";
     }
 
     @GetMapping("/boards/{boardId}")
@@ -51,13 +53,12 @@ public class BoardController {
     @PutMapping("/boards/edit/{boardId}")
     public String editBoard(@PathVariable Long boardId, @Valid BoardEdit boardEdit){
         boardService.editBoard(boardId, boardEdit);
-        return "board/read";
+        return "redirect:/boards/" + boardId;
     }
 
     @DeleteMapping("/boards/{boardId}")
-    public String deleteBoard(@PathVariable Long boardId){
+    public void deleteBoard(@PathVariable Long boardId){
         boardService.deleteBoard(boardId);
-        return "board/list";
     }
 
 }

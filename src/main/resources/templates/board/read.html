@@ -5,6 +5,45 @@
     <title>Read</title>
 </head>
 <body>
-read
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Board Read</h2>
+    </div>
+    <form>
+
+        <div>
+            <label for="title">TITLE</label>
+            <input type="text" id="title" name="title" class="form-control"
+                   value="title" th:value="${board.getTitle}" readonly>
+        </div>
+        <div>
+            <label for="content">CONTENT</label>
+            <input type="text" id="content" name="content" class="form-control"
+                   value="content" th:value="${board.getContent}" readonly>
+        </div>
+        <hr class="my-4">
+        <div>
+            <div class="row">
+                <div class="col">
+                    <button class="w-100 btn btn-primary btn-lg"
+                            th:onclick="|location.href='@{/boards/edit/{boardId}(boardId=${board.id})}'|" type="button">수정</button>
+                </div>
+
+                <button><a href="javascript:void(0);" class="btn btn-danger"
+                           th:onclick="'deleteBoard(' + ${board.getId} + ')'">삭제</a></button>
+
+
+                <div class="col">
+                    <button class="w-100 btn btn-secondary btn-lg"
+                            th:onclick="|location.href='@{/boards}'|"
+                            type="button">목록으로</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/boardDel.js"> </script>
 </body>
 </html>

@@ -6,7 +6,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 public class BoardPage {
 
     private static final int MAX_SIZE = 1000;

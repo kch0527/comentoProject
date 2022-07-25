@@ -53,9 +53,7 @@ public class BoardServiceTest {
                 .collect(Collectors.toList());
         repository.saveAll(boardList);
 
-        BoardPage boardPage = BoardPage.builder()
-                .page(1)
-                .build();
+        BoardPage boardPage = new BoardPage();
 
         List<BoardResponse> list = boardService.getList(boardPage);
 

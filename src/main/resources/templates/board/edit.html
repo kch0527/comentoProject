@@ -5,6 +5,36 @@
     <title>Edit</title>
 </head>
 <body>
-Edit
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Board Edit</h2>
+    </div>
+    <form th:action="@{'/boards/edit/' + ${board.id}}" th:method="put">
+
+        <div>
+            <label for="title">TITLE</label>
+            <input type="text" id="title" name="title" class="form-control"
+                   value="title"  th:value="${board.getTitle}">
+        </div>
+        <div>
+            <label for="content">CONTENT</label>
+            <input type="text" id="content" name="content" class="form-control"
+                   th:value="${board.getContent}">
+        </div>
+
+        <hr class="my-4">
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit" value="Update">update
+                </button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        th:onclick="|location.href='@{/boards/{boardId}(boardId=${board.id})}'|"
+                        type="button">취소</button>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>

@@ -5,7 +5,43 @@
     <title>List</title>
 </head>
 <body>
-list
+<div class="py-5 text-center">
+    <h2>List</h2>
+</div>
 
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary float-end"
+                th:onclick="|location.href='@{/boards/create}'|"
+                type="button">글 등록</button>
+    </div>
+</div>
+
+<div class="container" style="max-width: 600px">
+    <form th:action="@{'/boards'}" th:method="get">
+        <hr class="my-4">
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TITLE</th>
+                    <th>CONTENT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="board : ${boards}">
+                    <td><a href="item.html" th:href="@{/boards/{boardId}
+                                    (boardId=${board.id})}" th:text="${board.id}"></a></td>
+                    <td><a href="item.html" th:href="@{|/boards/${board.id}|}"
+                           th:text="${board.getTitle}"></a></td>
+                    <td th:text="${board.getContent}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+</div>
 </body>
 </html>
