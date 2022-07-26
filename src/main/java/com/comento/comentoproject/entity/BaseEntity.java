@@ -26,7 +26,7 @@ public abstract class BaseEntity {
     @PrePersist
     protected void onPersist(){
         this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
-        this.modDate = regDate;
+        this.modDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
     }
 
     @PreUpdate

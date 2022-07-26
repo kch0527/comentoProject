@@ -49,7 +49,7 @@
                                             <tbody>
                                             <tr th:each="board : ${boards}">
                                                 <td><a href="item.html" th:href="@{/boards/{boardId}
-                                    (boardId=${board.id})}" th:text="${board.id}"></a></td>
+                                                        (boardId=${board.id})}" th:text="${board.id}"></a></td>
                                                 <td><a href="item.html" th:href="@{|/boards/${board.id}|}"
                                                        th:text="${board.getTitle}"></a></td>
                                                 <td th:text="${board.getContent}"></td>
@@ -58,12 +58,47 @@
                                         </table>
                                     </div>
 
-                        <!--
-                        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-                            <a th:if="${page != nowPage}" th:href="@{/boards(page = ${page - 1})}" th:text="${page}"></a>
-                            <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
-                        </th:block>
-                        -->
+                        <!--표에 사용될 변수값 초기화 -->
+                        <ul class="pagination"
+                            th:with="start=${T(java.lang.Math).floor(boards.number/10)*10 + 1},last=(${start + 9 < boards.totalPages ? start + 9 : boards.totalPages})">
+                            <th:block th:with="
+                                    firstAddr=@{/boards(page=1)},
+                                    prevAddr=@{/boards(page=${boards.number})},
+                                    nextAddr=@{/boards(page=${boards.number + 2})},
+                                    lastAddr=@{/boards(page=${boards.totalPages})}">
+                                <li>
+                                    <a th:href="${firstAddr}" aria-label="First">
+                                        <span aria-hidden="true">First</span>
+                                    </a>
+                                </li>
+                                <!-- 이전 페이지로 가기 버튼 -->
+                                <li th:class="${boards.first} ? 'disabled'">
+                                    <a th:href="${boards.first} ? '#' :${prevAddr}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&lt;</span>
+                                    </a>
+                                </li>
+                                <!--1,2,3,4,.. 등 페이지-->
+                                <li th:each="page: ${#numbers.sequence(start, last)}"
+                                    th:class="${page == boards.number + 1} ? 'active'">
+                                    <a th:text="${page}" th:href="@{/boards(page=${page})}"></a>
+                                </li>
+                                <!--다음 페이지로 -->
+                                <li th:class="${boards.last} ? 'disabled'">
+                                    <a th:href="${boards.last} ? '#' : ${nextAddr}"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&gt;</span>
+                                    </a>
+                                </li>
+                                <!--맨 마지막 페이지로 이동 -->
+                                <li>
+                                    <a th:href="${lastAddr}" aria-label="Last">
+                                        <span aria-hidden="true">Last</span>
+                                    </a>
+                                </li>
+                            </th:block>
+                        </ul>
+
 
                     </form>
                 </div>

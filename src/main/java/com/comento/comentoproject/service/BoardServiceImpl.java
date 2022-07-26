@@ -9,6 +9,8 @@ import com.comento.comentoproject.requset.BoardEdit;
 import com.comento.comentoproject.requset.BoardPage;
 import com.comento.comentoproject.response.BoardResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -44,10 +46,8 @@ public class BoardServiceImpl implements BoardService{
         return boardResponse;
     }
 
-    public List<BoardResponse> getList(BoardPage boardPage){
-        return boardRepository.getList(boardPage).stream()
-                .map(BoardResponse::new)
-                .collect(Collectors.toList());
+    public Page<BoardResponse> getList(BoardPage boardPage, Pageable pageable){
+        return boardRepository.getList(boardPage, pageable).map(BoardResponse::new);
     }
 
     @Transactional

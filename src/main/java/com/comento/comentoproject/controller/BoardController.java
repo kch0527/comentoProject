@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,21 +22,10 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/boards")
-    public String getList(@ModelAttribute BoardPage boardPage, Model model){
-        List<BoardResponse> list = boardService.getList(boardPage);
-        /*
-        int nowPage = list.getPageable().getPageNumber() + 1;
-        int startPage = Math.max(nowPage - 4, 1);
-        int endPage = Math.min(nowPage + 5, list.getTotalPages());
-        */
-
-
+    public String getList(@ModelAttribute BoardPage boardPage, Model model, Pageable pageable){
+        Page<BoardResponse> list = boardService.getList(boardPage, pageable);
         model.addAttribute("boards", list);
-        /*
-        model.addAttribute("nowPage", nowPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-         */
+
         return "board/list";
     }
 
