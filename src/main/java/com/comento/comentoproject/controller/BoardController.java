@@ -3,12 +3,15 @@ package com.comento.comentoproject.controller;
 
 import com.comento.comentoproject.requset.BoardCreate;
 import com.comento.comentoproject.requset.BoardEdit;
-import com.comento.comentoproject.requset.BoardPage;
+
 import com.comento.comentoproject.response.BoardResponse;
 import com.comento.comentoproject.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +25,12 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/boards")
-    public String getList(@ModelAttribute BoardPage boardPage, Model model, Pageable pageable){
-        Page<BoardResponse> list = boardService.getList(boardPage, pageable);
-        model.addAttribute("boards", list);
+    public String getList(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)
+                              Pageable pageable, Model model){
 
+        Page<BoardResponse> list = boardService.getList(pageable);
+
+        model.addAttribute("boards", list);
         return "board/list";
     }
 

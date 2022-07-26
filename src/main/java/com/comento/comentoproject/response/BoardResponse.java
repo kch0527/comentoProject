@@ -15,19 +15,22 @@ public class BoardResponse {
     private final String title;
     private final String content;
     private final String modDate;
+    private final String regDate;
 
     public BoardResponse(Board board) {
         this.id = board.getId();
         this.title = board.getTitle();
         this.content = board.getContent();
         this.modDate = board.getModDate();
+        this.regDate = board.getRegDate();
     }
 
     @Builder
-    public BoardResponse(Long id, String title, String content, String modDate) {
+    public BoardResponse(Long id, String title, String content, String modDate, String regDate) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.modDate = modDate;
+        this.regDate = regDate;
     }
 }

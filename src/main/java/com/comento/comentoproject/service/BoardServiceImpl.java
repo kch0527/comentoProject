@@ -6,7 +6,7 @@ import com.comento.comentoproject.exception.BoardNotFound;
 import com.comento.comentoproject.repository.BoardRepository;
 import com.comento.comentoproject.requset.BoardCreate;
 import com.comento.comentoproject.requset.BoardEdit;
-import com.comento.comentoproject.requset.BoardPage;
+
 import com.comento.comentoproject.response.BoardResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,8 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -41,13 +40,14 @@ public class BoardServiceImpl implements BoardService{
                 .title(board.getTitle())
                 .content(board.getContent())
                 .modDate(board.getModDate())
+                .regDate(board.getRegDate())
                 .build();
 
         return boardResponse;
     }
 
-    public Page<BoardResponse> getList(BoardPage boardPage, Pageable pageable){
-        return boardRepository.getList(boardPage, pageable).map(BoardResponse::new);
+    public Page<BoardResponse> getList(Pageable pageable){
+        return boardRepository.findAll(pageable).map(BoardResponse::new);
     }
 
     @Transactional
