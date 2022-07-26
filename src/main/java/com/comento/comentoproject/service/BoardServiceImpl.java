@@ -65,9 +65,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Transactional
     public void deleteBoard(Long boardId){
-        boardRepository.delete(
-                boardRepository.findById(boardId).orElseThrow(BoardNotFound::new)
-        );
+        boardRepository.delete(boardRepository.findById(boardId).orElseThrow(BoardNotFound::new));
     }
 
 }

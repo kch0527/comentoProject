@@ -34,7 +34,7 @@ public class BoardController {
         return "board/create";
     }
 
-    @PostMapping("/boards/create")
+    @PostMapping("/boards")
     public String createBoard(@Valid BoardCreate boardCreate){
         boardService.saveBoard(boardCreate);
         return "redirect:/boards";
@@ -52,15 +52,16 @@ public class BoardController {
         return "board/edit";
     }
 
-    @PutMapping("/boards/edit/{boardId}")
+    @PutMapping("/boards/{boardId}")
     public String editBoard(@PathVariable Long boardId, @Valid BoardEdit boardEdit){
         boardService.editBoard(boardId, boardEdit);
         return "redirect:/boards/" + boardId;
     }
 
     @DeleteMapping("/boards/{boardId}")
-    public void deleteBoard(@PathVariable Long boardId){
+    public String deleteBoard(@PathVariable Long boardId){
         boardService.deleteBoard(boardId);
+        return "redirect:/boards";
     }
 
 }

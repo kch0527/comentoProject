@@ -31,9 +31,8 @@
                 </div>
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Read</h5>
-                    <form th:action="@{'/boards/' + ${board.id}}" th:method="get">
-                        <form>
 
+                        <form>
                             마지막 수정일 : <td th:text="${board.getModDate}"></td>
 
                             <div class="form-floating mb-3">
@@ -55,9 +54,10 @@
                             </div>
 
                             <div class="d-grid mb-2">
-                                <button href="javascript:void(0);" class="btn btn-lg btn-primary btn-create fw-bold text-uppercase"
-                                        th:onclick="'deleteBoard(' + ${board.getId} + ')'"> Delete
-                                </button>
+                                    <a href="javascript:void(0);" th:onclick="'deleteBoard(' + ${board.getId} + ')'"
+                                       class="btn btn-lg btn-primary btn-create fw-bold text-uppercase">
+                                        Delete
+                                    </a>
                             </div>
 
                             <div class="d-grid mb-2">
@@ -67,7 +67,6 @@
 
                         </form>
 
-                    </form>
                 </div>
             </div>
         </div>

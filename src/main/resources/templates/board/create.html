@@ -31,11 +31,11 @@
                 </div>
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">Create</h5>
-                    <form th:action="@{'/boards/create'}" th:method="post">
+                    <form th:action="@{'/boards'}" th:method="post" id="create_Form">
                         <form>
 
                             <div class="form-floating mb-3">
-                                <input type="text" name="title" class="form-control" id="title" placeholder="Title" required autofocus>
+                                <input type="text" name="title" class="form-control" id="title" onkeyup="notNull(this);" onchange="notNull(this);" placeholder="Title" required autofocus>
                                 <label for="title">Title</label>
                             </div>
 
@@ -48,7 +48,7 @@
                             <hr class="my-4">
 
                             <div class="d-grid mb-2">
-                                <button class="btn btn-lg btn-primary btn-create fw-bold text-uppercase" type="submit" value="Register">Register</button>
+                                <button class="btn btn-lg btn-primary btn-create fw-bold text-uppercase" id="register" type="submit" value="Register">Register</button>
                             </div>
 
                             <div class="d-grid mb-2">
@@ -64,6 +64,7 @@
     </div>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/notNull.js"> </script>
 </body>
 </html>
