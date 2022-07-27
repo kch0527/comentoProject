@@ -74,7 +74,7 @@
                                 <ul class="pagination ">
 
                                     <li th:classappend="${boards.first} ? 'disabled'" class="page-item">
-                                        <a class="page-link" th:href="${boards.first} ? '#' : @{/boards(page=${#numbers.formatDecimal(startPage - pageSize, 0, -1)})}" aria-label="Previous">
+                                        <a class="page-link" th:href="${boards.first} ? '#' : @{/boards(page=${#numbers.formatDecimal((pageNumber + 1) - 1, 0, -1)})}" aria-label="Previous">
                                             <span aria-hidden="true">&lt;</span>
                                             <span class="sr-only">PrevPage</span>
                                         </a>
@@ -87,7 +87,7 @@
                                     </ul>
 
                                     <li th:classappend="${boards.last} ? 'disabled'" class="page-item">
-                                        <a class="page-link" th:href="${boards.last} ? '#' : @{/boards(page=${#numbers.formatDecimal(startPage + pageSize, 0, -1)})}" aria-label="Next">
+                                        <a class="page-link" th:href="${boards.last} ? '#' : @{/boards(page=${#numbers.formatDecimal((pageNumber + 1) + 1, 0, -1)})}" aria-label="Next">
                                             <span aria-hidden="true">&gt;</span>
                                             <span class="sr-only">NextPage</span>
                                         </a>
