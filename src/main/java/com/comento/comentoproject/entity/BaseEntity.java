@@ -33,6 +33,5 @@ public abstract class BaseEntity {
     protected void onUpdate(){
         this.modDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
     }
-
 }
 
